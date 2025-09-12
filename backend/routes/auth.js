@@ -4,11 +4,12 @@ import bcrypt from 'bcrypt';
 
 var router = express.Router();
 
-// MongoDB connection
-// IMPORTANT: Replace 'mongodb://localhost:27017/my_database' with your actual MongoDB connection string.
-mongoose.connect('mongodb+srv://iwp:1234@cluster0.1qxgtts.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0')
-  .then(() => console.log('MongoDB connected successfully'))
-  .catch(err => console.log(err));
+// ✅ Use environment variable OR fallback to local MongoDB
+const mongoURI = process.env.MONGO_URI || "mongodb+srv://riyaroyp2022_db_user:ip5eqd3DA5gTUQfb@cluster0.1zf2blx.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
+
+mongoose.connect(mongoURI)
+  .then(() => console.log("✅ MongoDB connected successfully"))
+  .catch(err => console.error("❌ MongoDB connection error:", err));
 
 // Mongoose User Schema
 const userSchema = new mongoose.Schema({
@@ -43,25 +44,19 @@ const User = mongoose.model('Iwp', userSchema);
 router.post('/register', async (req, res) => {
   const { username, email, password } = req.body;
 
-  // Simple validation
   if (!username || !email || !password) {
     return res.status(400).json({ msg: 'Please enter all fields' });
   }
 
   try {
-    // Check for existing user
     let user = await User.findOne({ email });
     if (user) {
       return res.status(400).json({ msg: 'User already exists' });
     }
 
-    user = new User({
-      username,
-      email,
-      password,
-    });
-
+    user = new User({ username, email, password });
     await user.save();
+
     res.status(201).json({ msg: 'User registered successfully' });
   } catch (err) {
     res.status(500).json({ error: err.message });
@@ -72,23 +67,16 @@ router.post('/register', async (req, res) => {
 router.post('/login', async (req, res) => {
   const { email, password } = req.body;
 
-  // Simple validation
   if (!email || !password) {
     return res.status(400).json({ msg: 'Please enter all fields' });
   }
 
   try {
-    // Check for existing user
     const user = await User.findOne({ email });
-    if (!user) {
-      return res.status(400).json({ msg: 'Invalid credentials' });
-    }
+    if (!user) return res.status(400).json({ msg: 'Invalid credentials' });
 
-    // Compare password
     const isMatch = await bcrypt.compare(password, user.password);
-    if (!isMatch) {
-      return res.status(400).json({ msg: 'Invalid credentials' });
-    }
+    if (!isMatch) return res.status(400).json({ msg: 'Invalid credentials' });
 
     res.status(200).json({ msg: 'Login successful' });
   } catch (err) {
