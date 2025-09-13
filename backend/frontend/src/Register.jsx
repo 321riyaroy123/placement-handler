@@ -18,7 +18,7 @@ const Register = () => {
     }
 
     try {
-      const response = await fetch('http://localhost:3000/auth/register', {
+      const response = await fetch('https://placement-handler.onrender.com/auth/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
