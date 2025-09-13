@@ -54,10 +54,17 @@ const Schedule = () => {
 
         /* Main Content Layout */
         
-.main-layout {
+.main-content {
+  flex: 1;
+  padding: 2rem;
+  overflow-y: auto;
+
   display: flex;
-  min-height: 100vh;
+  flex-direction: column;
+  justify-content: center; /* centers vertically */
+  align-items: center; /* centers horizontally */
 }
+
 
 /* Left Sidebar */
 /* Sidebar container */
@@ -148,14 +155,15 @@ const Schedule = () => {
 
         /* Table Styles */
         .schedule-table-container {
-          background-color: #fff;
-          border-radius: 10px;
-          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-          overflow: hidden; /* Ensures rounded corners are applied to table */
-          width: 100%;
-          max-width: 900px;
-          margin: auto;
-        }
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  overflow: hidden;
+  width: 100%;
+  max-width: 900px; /* ensures table doesn't stretch too much */
+  margin: 2rem auto; /* centers horizontally */
+}
+
         
         .schedule-table {
           width: 100%;
@@ -290,6 +298,7 @@ const Schedule = () => {
 
 
 export default Schedule;
+
 
 
 
