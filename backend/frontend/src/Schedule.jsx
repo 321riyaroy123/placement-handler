@@ -213,10 +213,11 @@ const Schedule = () => {
         {/* Sidebar */}
         <aside className="sidebar">
           <nav className="sidebar-nav">
-            <Link to="/dashboard" className="sidebar-link">Dashboard</Link>
-            <Link to="/schedule" className="sidebar-link active">Schedule</Link>
-            <Link to="/analytics" className="sidebar-link">Analytics</Link>
-            <Link to="/landing" className="sidebar-link">Landing Page</Link>
+            <a href="/dashboard">Student Details</a>
+  <a href="/schedule">Schedule</a>
+  <a href="/analytics">Analytics</a>
+  <a href="/offer-upload">Offer Letters</a> {/* new link */}
+  <a href="/landing">Landing Page</a>
           </nav>
         </aside>
 
@@ -257,5 +258,6 @@ const Schedule = () => {
     </div>
   );
 };
+
 
 export default Schedule;
