@@ -5,235 +5,158 @@ const Schedule = () => {
   return (
     <div className="schedule-page">
       <style>{`
-        /* General Body & Layout Styles */
         body {
-          margin: 0;
-          font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-          background-color: #f4f7f9;
-          color: #333;
-          width:100vw;
-        }
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f4f7f9;
+      margin: 0;
+      color: #333;
+      width: 100vw;
+    }
 
-        .schedule-page {
-          display: flex;
-          flex-direction: column;
-          min-height: 100vh;
-          width:100vw;
-        }
-        
-        /* Header */
-        .header {
-          background-color: #007bff;
-          color: white;
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          padding: 1.5rem 3vw;
-          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
+    /* Header */
+    .header {
+      background-color: #007bff;
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.5rem 3vw;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
 
-        .logo {
-          font-size: 1.8vw;
-          font-weight: 600;
-          letter-spacing: 1px;
-        }
+    .header .logo {
+      font-size: 1.8rem;
+      font-weight: 600;
+    }
 
-        .nav-link {
-          color: white;
-          text-decoration: none;
-          font-size: 1vw;
-          font-weight: 500;
-          padding: 0.5rem 1rem;
-          transition: background-color 0.3s, color 0.3s;
-          border-radius: 5px;
-        }
+    .header a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 1rem;
+      padding: 0.5rem 1rem;
+      border-radius: 5px;
+      transition: background-color 0.3s;
+    }
 
-        .nav-link:hover {
-          background-color: rgba(255, 255, 255, 0.2);
-        }
+    .header a:hover {
+      background-color: rgba(255, 255, 255, 0.2);
+    }
 
-        /* Main Content Layout */
-        
-.main-content {
-  flex: 1;
-  padding: 2rem;
-  overflow-y: auto;
+    /* Hero Section */
+    .hero {
+      text-align: center;
+      padding: 4rem 2rem;
+    }
 
-  display: flex;
-  flex-direction: column;
-  justify-content: center; /* centers vertically */
-  align-items: center; /* centers horizontally */
-}
+    .hero h1 {
+      font-size: 3rem;
+      color: #0056b3;
+      margin-bottom: 0.5rem;
+    }
 
+    .hero p {
+      font-size: 1.25rem;
+      color: #666;
+      max-width: 700px;
+      margin: 0 auto;
+    }
 
-/* Left Sidebar */
-/* Sidebar container */
-.sidebar {
-  width: 20vw;
-  min-width: 200px;
-  background-color: #fff;
-  padding: 2rem 0;
-  border-right: 1px solid #e0e6ed;
-  box-shadow: 2px 0 5px rgba(0,0,0,0.05);
-  display: flex;
-  flex-direction: column;
-}
+    /* Form Section */
+    .main {
+      display: flex;
+      justify-content: center;
+      padding: 2rem;
+    }
 
-/* Sidebar navigation */
-.sidebar-nav {
-  display: flex;
-  flex-direction: column;
-  padding: 0 1.5rem;
-}
+    form {
+      background-color: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      padding: 2rem;
+      max-width: 500px;
+      width: 100%;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
 
-/* Sidebar links */
-.sidebar-link {
-  display: flex;
-  align-items: center;
-  padding: 0.75rem 1rem;
-  margin-bottom: 0.5rem;
-  text-decoration: none;
-  color: #555;
-  font-size: 1.1vw;
-  font-weight: 500;
-  border-radius: 8px;
-  transition: background-color 0.3s, color 0.3s;
-}
+    form:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+    }
 
-.sidebar-link:hover {
-  background-color: #e9f5ff;
-  color: #007bff;
-}
+    h2 {
+      color: #007bff;
+      margin-bottom: 1rem;
+    }
 
-.sidebar-link.active {
-  background-color: #007bff;
-  color: white;
-  box-shadow: 0 4px 6px rgba(0,123,255,0.2);
-}
+    .form-group {
+      margin-bottom: 15px;
+    }
 
-/* Responsive adjustments */
-@media (max-width: 768px) {
-  .sidebar {
-    width: 100%;
-    border-right: none;
-    border-bottom: 1px solid #e0e6ed;
-    flex-direction: row;
-    justify-content: space-around;
-    padding: 1rem 0;
-  }
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
 
-  .sidebar-nav {
-    flex-direction: row;
-    width: 100%;
-    justify-content: space-around;
-    padding: 0;
-  }
+    input[type="text"],
+    input[type="date"],
+    input[type="file"] {
+      width: 100%;
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
 
-  .sidebar-link {
-    font-size: 3vw;
-    margin-bottom: 0;
-  }
-}
+    .file-info {
+      margin-top: 5px;
+      font-style: italic;
+      color: #555;
+    }
 
+    button {
+      margin-top: 15px;
+      padding: 10px 15px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+    }
 
-        .sidebar-link.active {
-          background-color: #007bff;
-          color: white;
-          box-shadow: 0 4px 6px rgba(0, 123, 255, 0.2);
-        }
+    button:hover {
+      background-color: #0056b3;
+    }
 
-        /* Main Content Area */
-        
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 1.5rem;
+      background-color: #007bff;
+      color: white;
+      margin-top: 30px;
+    }
 
-        .main-title {
-          color: #0056b3;
-          margin-bottom: 1.5rem;
-          font-size: 2.2vw;
-          font-weight: 600;
-          min-height: 25px;
-        }
+    /* Responsive */
+    @media (max-width: 768px) {
+      .header {
+        flex-direction: column;
+        padding: 1rem;
+      }
 
-        /* Table Styles */
-        .schedule-table-container {
-  background-color: #fff;
-  border-radius: 10px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-  overflow: hidden;
-  width: 100%;
-  max-width: 900px; /* ensures table doesn't stretch too much */
-  margin: 2rem auto; /* centers horizontally */
-}
+      .hero h1 {
+        font-size: 6vw;
+      }
 
-        
-        .schedule-table {
-          width: 100%;
-          border-collapse: collapse;
-        }
+      .hero p {
+        font-size: 4vw;
+      }
 
-        .schedule-table th, .schedule-table td {
-          padding: 1.25rem 1.5rem;
-          text-align: left;
-          border-bottom: 1px solid #e0e6ed;
-        }
-
-        .schedule-table th {
-          background-color: #007bff;
-          color: white;
-          font-weight: 600;
-          letter-spacing: 0.5px;
-        }
-
-        .schedule-table tbody tr:hover {
-          background-color: #f3f8ff;
-          cursor: pointer;
-        }
-        
-        /* Responsive Design */
-        @media (max-width: 768px) {
-          .header {
-            flex-direction: column;
-            padding: 1rem;
-          }
-
-          .logo {
-            font-size: 5vw;
-          }
-
-          .nav-link {
-            font-size: 3vw;
-            margin-top: 10px;
-          }
-
-          .main-layout {
-            flex-direction: column;
-          }
-
-          .sidebar {
-            width: 100%;
-            border-right: none;
-            border-bottom: 1px solid #e0e6ed;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-          }
-
-          .sidebar-nav {
-            flex-direction: row;
-            justify-content: space-around;
-            padding: 1rem 0;
-          }
-
-          .sidebar-link {
-            font-size: 3vw;
-            min-height: auto;
-          }
-
-          .main-content {
-            padding: 1rem;
-          }
-
-          .main-title {
-            font-size: 6vw;
-          }
-        }
+      form {
+        padding: 1.5rem;
+      }
+    }
       `}</style>
       
       {/* Top Header */}
@@ -298,6 +221,7 @@ const Schedule = () => {
 
 
 export default Schedule;
+
 
 
 
