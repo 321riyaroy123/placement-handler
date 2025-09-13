@@ -60,8 +60,10 @@ const Schedule = () => {
 }
 
 /* Left Sidebar */
+/* Sidebar container */
 .sidebar {
-  width: 20vw; /* or min-width: 200px */
+  width: 20vw;
+  min-width: 200px;
   background-color: #fff;
   padding: 2rem 0;
   border-right: 1px solid #e0e6ed;
@@ -70,42 +72,62 @@ const Schedule = () => {
   flex-direction: column;
 }
 
-/* Main content takes remaining space */
-.main-content {
-  flex: 1; /* <- This ensures it fills all available space */
-  padding: 2rem;
-  overflow-y: auto;
+/* Sidebar navigation */
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  padding: 0 1.5rem;
 }
 
-/* Remove any extra sidebar or padding on the right */
+/* Sidebar links */
+.sidebar-link {
+  display: flex;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  margin-bottom: 0.5rem;
+  text-decoration: none;
+  color: #555;
+  font-size: 1.1vw;
+  font-weight: 500;
+  border-radius: 8px;
+  transition: background-color 0.3s, color 0.3s;
+}
 
-        /* Sidebar */
-        
+.sidebar-link:hover {
+  background-color: #e9f5ff;
+  color: #007bff;
+}
 
-        .sidebar-nav {
-          display: flex;
-          flex-direction: column;
-          padding: 0 1.5rem;
-        }
+.sidebar-link.active {
+  background-color: #007bff;
+  color: white;
+  box-shadow: 0 4px 6px rgba(0,123,255,0.2);
+}
 
-        .sidebar-link {
-          display: flex;
-          align-items: center;
-          padding: 0.75rem 1rem;
-          margin-bottom: 0.5rem;
-          text-decoration: none;
-          color: #555;
-          font-size: 1.1vw;
-          min-height: 30px;
-          font-weight: 500;
-          border-radius: 8px;
-          transition: background-color 0.3s, color 0.3s;
-        }
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .sidebar {
+    width: 100%;
+    border-right: none;
+    border-bottom: 1px solid #e0e6ed;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 1rem 0;
+  }
 
-        .sidebar-link:hover {
-          background-color: #e9f5ff;
-          color: #007bff;
-        }
+  .sidebar-nav {
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-around;
+    padding: 0;
+  }
+
+  .sidebar-link {
+    font-size: 3vw;
+    margin-bottom: 0;
+  }
+}
+
 
         .sidebar-link.active {
           background-color: #007bff;
@@ -268,5 +290,6 @@ const Schedule = () => {
 
 
 export default Schedule;
+
 
 
