@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Upcoming Company Visits</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #FFE2E2;
+    }
+
+    .header {
+      background-color: #6a0dad;
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      padding: 15px 30px;
+      font-size: 18px;
+    }
+
+    .sidebar {
+      background-color: #FFE2E2;
+      padding: 20px;
+      width: 200px;
+      height: 100vh;
+      position: fixed;
+      border-right: 2px solid #7d7373;
+    }
+
+    .sidebar a {
+      display: block;
+      margin-bottom: 10px;
+      text-decoration: none;
+      color: #000;
+      font-weight: bold;
+    }
+
+    .sidebar a.active {
+      color: #6a0dad;
+      text-decoration: underline;
+    }
+
+    .main {
+      margin-left: 220px;
+      padding: 40px;
+    }
+
+    h2 {
+      color: #6a0dad;
+      margin-bottom: 20px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: white;
+      box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    th, td {
+      padding: 12px 15px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+
+    th {
+      background-color: #6a0dad;
+      color: white;
+    }
+
+    tr:hover {
+      background-color: #f3d9ff;
+    }
+  </style>
+</head>
+<body>
+  <!-- Top Header -->
+  <div class="header">
+    <div><strong>PLACEMENT CELL</strong></div>
+    <div><a href="overview.html" style="color:white; text-decoration:none;">Overview</a></div>
+  </div>
+
+  <!-- Page Layout -->
+  <div class="container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <a href="dashboard.html">Dashboard</a>
+      <a href="schedule.html" class="active">Schedule</a>
+      <a href="analytics.html">Analytics</a>
+      <a href="landing.html">Landing Page</a>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main">
+      <h2>Upcoming Placement Schedule</h2>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Company</th>
+            <th>Date</th>
+            <th>Role</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Company A</td>
+            <td>02/06/2025</td>
+            <td>Software Engineer</td>
+          </tr>
+          <tr>
+            <td>Company B</td>
+            <td>05/06/2025</td>
+            <td>Data Analyst</td>
+          </tr>
+          <tr>
+            <td>Company C</td>
+            <td>09/06/2025</td>
+            <td>Network Administrator</td>
+          </tr>
+        </tbody>
+      </table>
+    </main>
+  </div>
+</body>
+</html>

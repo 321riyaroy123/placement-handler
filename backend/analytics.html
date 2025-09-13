@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Placement Analytics</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #FFE2E2; /* same as dashboard */
+      color: #1c1c1c;
+    }
+    header {
+      background-color: #6a0dad; /* dashboard purple */
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 30px;
+    }
+    header a {
+      color: white;
+      text-decoration: none;
+      margin-left: 20px;
+      font-weight: bold;
+    }
+    .container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 1rem;
+      padding: 1.5rem;
+      margin-top: 20px;
+    }
+    .card {
+      background-color: #fff; /* white cards for contrast */
+      border: 2px solid #7d7373;
+      border-radius: 1rem;
+      padding: 1rem;
+      box-shadow: 0px 3px 6px rgba(0,0,0,0.1);
+    }
+    .progress-bar {
+      background-color: #ccc;
+      border-radius: 10px;
+      overflow: hidden;
+      height: 10px;
+      margin-top: 4px;
+    }
+    .progress {
+      height: 100%;
+      background-color: #6a0dad; /* purple progress */
+    }
+    .donut-legend span {
+      display: flex;
+      align-items: center;
+      margin: 0.3rem 0;
+    }
+    .donut-legend span i {
+      width: 12px;
+      height: 12px;
+      display: inline-block;
+      margin-right: 8px;
+      border-radius: 50%;
+    }
+    canvas {
+      display: block;
+      margin: auto;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>STUDENT PLACEMENT 🎓</h1>
+    <nav>
+      <a href="dashboard.html">Dashboard</a>
+      <a href="overview.html">Overview</a>
+      <a href="schedule.html">Schedule</a>
+      <a href="landing.html">Landing Page</a>
+    </nav>
+  </header>
+
+  <div class="container">
+    <div class="card">
+      <h3 style="color:#6a0dad;">Student Analytics</h3>
+      <canvas id="studentChart" width="180" height="180"></canvas>
+      <div class="donut-legend">
+        <span><i style="background-color: #f9df75;"></i>Eligible</span>
+        <span><i style="background-color: #89c2ff;"></i>Interviewed</span>
+        <span><i style="background-color: #a3e6b1;"></i>Placed</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3 style="color:#6a0dad;">Staff Analytics</h3>
+      <p>Registrations</p>
+      <div class="progress-bar"><div class="progress" style="width: 80%;"></div></div>
+      <p>Eligible Matches</p>
+      <div class="progress-bar"><div class="progress" style="width: 70%;"></div></div>
+      <p>Scheduled Interviews</p>
+      <div class="progress-bar"><div class="progress" style="width: 50%;"></div></div>
+      <p>Placements</p>
+      <div class="progress-bar"><div class="progress" style="width: 40%;"></div></div>
+    </div>
+
+    <div class="card">
+      <h3 style="color:#6a0dad;">Placement Analytics</h3>
+      <canvas id="barChart" width="300" height="200"></canvas>
+    </div>
+
+    <div class="card">
+      <h3 style="color:#6a0dad;">Updates</h3>
+      <ul>
+        <li>• 25 students placed at Infosys</li>
+        <li>• TCS drive on July 3rd</li>
+        <li>• Resume workshop scheduled next week</li>
+      </ul>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    const ctx1 = document.getElementById('studentChart').getContext('2d');
+    new Chart(ctx1, {
+      type: 'doughnut',
+      data: {
+        labels: ['Eligible', 'Interviewed', 'Placed'],
+        datasets: [{
+          data: [40, 40, 20],
+          backgroundColor: ['#f9df75', '#89c2ff', '#a3e6b1']
+        }]
+      },
+      options: {
+        cutout: '60%',
+        plugins: { legend: { display: false } }
+      }
+    });
+
+    const ctx2 = document.getElementById('barChart').getContext('2d');
+    new Chart(ctx2, {
+      type: 'bar',
+      data: {
+        labels: ['CSE', 'IT', 'ECE', 'ME'],
+        datasets: [{
+          label: 'Placements',
+          data: [80, 60, 70, 50],
+          backgroundColor: ['#f9df75', '#a3e6b1', '#89c2ff', '#f58ea3']
+        }]
+      },
+      options: {
+        plugins: { legend: { display: false } },
+        scales: { y: { beginAtZero: true } }
+      }
+    });
+  </script>
+</body>
+</html>
