@@ -18,8 +18,11 @@ function App() {
         <Route path="/register" element={<Register />} />
 
         {/* Other pages */}
-        <Route path="/landing" element={<Landing />} />
-        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/" element={<Login />} />
+<Route path="/landing" element={<Landing />} />
+<Route path="/dashboard" element={<Dashboard />} />
+<Route path="/offer-upload" element={<OfferUpload />} />
+
         <Route path="/analytics" element={<Analytics />} />
         <Route path="/overview" element={<Overview />} />
         <Route path="/schedule" element={<Schedule />} />
