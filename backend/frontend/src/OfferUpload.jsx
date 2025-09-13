@@ -58,7 +58,7 @@ const OfferLettersForm = () => {
               name={field}
               value={offer[field]}
               onChange={handleChange}
-              placeholder={`Enter ${field.replace(/([A-Z])/g, ' $1').toLowerCase()}`}
+              placeholder={Enter ${field.replace(/([A-Z])/g, ' $1').toLowerCase()}}
               required
             />
           </div>
@@ -84,6 +84,7 @@ const OfferLetters = () => {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background-color: #f4f7f9;
   color: #333;
+  width:100vw;
 }
 
 /* Dashboard Layout */
@@ -91,6 +92,7 @@ const OfferLetters = () => {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  width:100vw;
 }
 
 /* Header */
