@@ -1,6 +1,7 @@
 // frontend/src/Login.jsx
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import './LoginPage.css';
 
 const Login = () => {
   const navigate = useNavigate(); // ✅ Hooks must be inside component
@@ -74,3 +75,4 @@ const Login = () => {
 };
 
 export default Login;
+
