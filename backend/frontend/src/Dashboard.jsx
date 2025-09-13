@@ -253,74 +253,42 @@ const StudentDetails = () => {
 
         {/* Main Content */}
         <main className="main-content">
-          <h2 className="main-title">Student Details</h2>
-          <div className="form-card">
-            <form onSubmit={handleSubmit}>
-              <div className="form-group">
-                <label>Name</label>
-                <input
-                  name="name"
-                  value={student.name}
-                  onChange={handleChange}
-                  placeholder="Enter student name"
-                  required
-                />
-              </div>
-
-              <div className="form-group">
-                <label>Email</label>
-                <input
-                  type="email"
-                  name="email"
-                  value={student.email}
-                  onChange={handleChange}
-                  placeholder="Enter email"
-                  required
-                />
-              </div>
-
-              <div className="form-group">
-                <label>Roll Number</label>
-                <input
-                  name="rollNumber"
-                  value={student.rollNumber}
-                  onChange={handleChange}
-                  placeholder="Enter roll number"
-                  required
-                />
-              </div>
-
-              <div className="form-group">
-                <label>Department</label>
-                <input
-                  name="department"
-                  value={student.department}
-                  onChange={handleChange}
-                  placeholder="Enter department"
-                  required
-                />
-              </div>
-
-              <div className="form-group">
-                <label>Phone</label>
-                <input
-                  name="phone"
-                  value={student.phone}
-                  onChange={handleChange}
-                  placeholder="Enter phone number"
-                  required
-                />
-              </div>
-
-              <button type="submit" className="submit-button">Update Details</button>
-              {message && <p className="message">{message}</p>}
-            </form>
-          </div>
-        </main>
+            <h1 className="main-title">Student Details</h1>
+            <div className="form-card">
+              <form onSubmit={handleSubmit}>
+                <div className="form-group">
+                  <label htmlFor="studentName">Student Name</label>
+                  <input type="text" id="studentName" name="studentName" placeholder="Enter student's name" />
+                </div>
+                <div className="form-group">
+                  <label htmlFor="registerNumber">Register Number</label>
+                  <input type="text" id="registerNumber" name="registerNumber" placeholder="Enter register number" />
+                </div>
+                <div className="form-group">
+                  <label htmlFor="tenthMarks">10th Marks (%)</label>
+                  <input type="text" id="tenthMarks" name="tenthMarks" placeholder="e.g., 95.5" />
+                </div>
+                <div className="form-group">
+                  <label htmlFor="twelfthMarks">12th Marks (%)</label>
+                  <input type="text" id="twelfthMarks" name="twelfthMarks" placeholder="e.g., 92.0" />
+                </div>
+                <div className="form-group">
+                  <label htmlFor="semesterResults">Semester Results (CGPA)</label>
+                  <input type="text" id="semesterResults" name="semesterResults" placeholder="e.g., 8.5" />
+                </div>
+                <div className="form-group">
+                  <label htmlFor="aggregate">Consolidated Aggregate (%)</label>
+                  <input type="text" id="aggregate" name="aggregate" placeholder="e.g., 88.7" />
+                </div>
+                <button type="submit" className="submit-button">Submit</button>
+              </form>
+            </div>
+          </main>
       </div>
     </div>
   );
 };
 
 export default StudentDetails;
+
 
