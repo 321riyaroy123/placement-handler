@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+const navigate = useNavigate();
 
 const LoginPage = () => {
   const [email, setEmail] = useState('');
@@ -30,7 +32,9 @@ const LoginPage = () => {
       if (response.ok) {
         console.log('Login successful:', data);
         // Redirect to dashboard on successful login
-        window.location.href = '/dashboard';
+
+navigate('/landing');
+
       } else {
         // Display error message from the backend
         setError(data.msg || 'Login failed');
@@ -286,3 +290,4 @@ const LoginPage = () => {
 };
 
 export default LoginPage;
+
