@@ -379,10 +379,11 @@ const Analytics = () => {
         {/* Sidebar */}
         <aside className="sidebar">
           <nav className="sidebar-nav">
-            <Link to="/dashboard" className="sidebar-link">Dashboard</Link>
-            <Link to="/schedule" className="sidebar-link">Schedule</Link>
-            <Link to="/analytics" className="sidebar-link active">Analytics</Link>
-            <Link to="/landing" className="sidebar-link">Landing Page</Link>
+            <a href="/dashboard">Student Details</a>
+  <a href="/schedule">Schedule</a>
+  <a href="/analytics">Analytics</a>
+  <a href="/offer-upload">Offer Letters</a> {/* new link */}
+  <a href="/landing">Dashboard</a>
           </nav>
         </aside>
 
@@ -458,5 +459,6 @@ const Analytics = () => {
     </div>
   );
 };
+
 
 export default Analytics;
