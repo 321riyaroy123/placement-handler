@@ -23,7 +23,7 @@ router.post("/", upload.single("offerLetter"), async (req, res) => {
 
     const offer = new Offer({
       ...req.body,
-      offerLetterPath: req.file.path,
+      offerLetterPath: `/uploads/${req.file.filename}`,
     });
 
     const savedOffer = await offer.save();
