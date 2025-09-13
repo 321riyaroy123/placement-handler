@@ -58,7 +58,7 @@ const OfferLettersForm = () => {
               name={field}
               value={offer[field]}
               onChange={handleChange}
-              placeholder={Enter ${field.replace(/([A-Z])/g, ' $1').toLowerCase()}}
+              placeholder={`Enter ${field.replace(/([A-Z])/g, ' $1').toLowerCase()}`}
               required
             />
           </div>
