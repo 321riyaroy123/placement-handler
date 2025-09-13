@@ -6,9 +6,9 @@ import cors from "cors";
 import { fileURLToPath } from "url";
 
 // Import routes
-import authRouter from "./backend/routes/auth.js";
-import offerRouter from "./backend/routes/offers.js";
-import studentRouter from "./backend/routes/students.js";
+import authRouter from "./routes/auth.js";
+import offerRouter from "./routes/offers.js";
+import studentRouter from "./routes/students.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -23,9 +23,9 @@ app.use(cookieParser());
 app.use(cors());
 
 // -------------------------
-// Serve React frontend
+// Serve React frontend (inside backend/frontend)
 // -------------------------
-const frontendPath = path.join(__dirname, "../backend/frontend/dist");
+const frontendPath = path.join(__dirname, "frontend", "dist");
 app.use(express.static(frontendPath));
 
 // API routes
@@ -36,7 +36,6 @@ app.use("/api/students", studentRouter);
 // -------------------------
 // SPA fallback
 // -------------------------
-// Any non-API request should return React’s index.html
 app.get("*", (req, res) => {
   res.sendFile(path.join(frontendPath, "index.html"));
 });
