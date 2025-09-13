@@ -6,6 +6,7 @@ import cors from 'cors';
 import { fileURLToPath } from 'url';
 
 import authRouter from './routes/auth.js';
+import offerRouter from "./routes/offers.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -24,6 +25,7 @@ app.use(express.static(path.join(__dirname, 'frontend', 'dist')));
 
 // API routes
 app.use('/auth', authRouter);
+app.use("/api/offers", offerRouter);
 
 // SPA fallback: send index.html for all other routes
 app.get('*', (req, res) => {
