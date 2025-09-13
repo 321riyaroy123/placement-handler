@@ -20,13 +20,13 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(cors()); // Use the cors middleware to allow all origins
 
-// Serve static files from the frontend folder
-app.use(express.static(path.join(__dirname, 'frontend')));
+// Serve static files directly from backend folder
+app.use(express.static(__dirname));
 
-// Route for index.html
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'frontend', 'index.html'));
+  res.sendFile(path.join(__dirname, 'index.html'));
 });
+
 
 
 // API routes
