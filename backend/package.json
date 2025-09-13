@@ -1,14 +1,16 @@
 {
   "name": "backend",
   "version": "1.0.0",
-  "private": true,
-  "type": "module",
+  "description": "This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.",
+  "main": "app.js",
   "scripts": {
-    "start": "node app.js",
-    "dev": "nodemon app.js",
-    "build": "babel src -d lib",
-    "test": "jest"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
+<<<<<<< HEAD
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+=======
   "dependencies": {
   "bcrypt": "^5.1.1",
   "cookie-parser": "^1.4.6",
@@ -21,4 +23,5 @@
   "devDependencies": {
     "nodemon": "^3.1.10"
   }
+>>>>>>> e46766df4028c131809cd26a6a86b6c5e37678f2
 }
