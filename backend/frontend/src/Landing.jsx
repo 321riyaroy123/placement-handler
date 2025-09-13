@@ -128,17 +128,49 @@ const Landing = () => {
           line-height: 1.6;
         }
 
+        /* Team Section */
+        .team-section {
+          background-color: #f7f7f7;
+          border: 1px solid #e0e0e0;
+          border-radius: 8px;
+          padding: 2rem;
+          margin: 4rem 2rem;
+          box-shadow: inset 0 1px 3px rgba(0,0,0,0.05);
+          text-align: center;
+        }
+
+        .team-section h2 {
+          font-size: 2rem;
+          color: #007bff;
+          margin-bottom: 1.5rem;
+        }
+
+        .team-list {
+          list-style: none;
+          padding: 0;
+          display: flex;
+          justify-content: center;
+          flex-wrap: wrap;
+          gap: 2rem;
+        }
+
+        .team-list li {
+          font-size: 1.1rem;
+          color: #555;
+          font-weight: 500;
+        }
+
         /* Footer */
         footer {
           text-align: center;
           padding: 1.5rem;
           background-color: #343a40;
           color: white;
-          margin-top: auto; /* Push footer to the bottom */
+          margin-top: auto;
           box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
         }
 
-        /* Media Queries for Responsiveness */
+        /* Media Queries */
         @media (max-width: 768px) {
           .header {
             flex-direction: column;
@@ -157,7 +189,7 @@ const Landing = () => {
           .nav-link {
             font-size: 3.5vw;
           }
-          
+
           .hero h1 {
             font-size: 8vw;
           }
@@ -169,22 +201,32 @@ const Landing = () => {
           .cards-section {
             padding: 2rem 1rem;
           }
+
+          .team-section {
+            margin: 2rem 1rem;
+          }
+
+          .team-section h2 {
+            font-size: 6vw;
+          }
+
+          .team-list li {
+            font-size: 4vw;
+          }
         }
       `}</style>
 
       {/* Header */}
       <header className="header">
-  <div className="logo">Placement Cell</div>
-  <nav className="nav">
-    <Link to="/dashboard" className="nav-link">Student Details</Link>
-    <Link to="/overview" className="nav-link">Overview</Link>
-    <Link to="/schedule" className="nav-link">Schedule</Link>
-    <Link to="/analytics" className="nav-link">Analytics</Link>
-    {/* New navigation link */}
-    <Link to="/offer-upload" className="nav-link">Upload Offer</Link>
-  </nav>
-</header>
-
+        <div className="logo">Placement Cell</div>
+        <nav className="nav">
+          <Link to="/dashboard" className="nav-link">Student Details</Link>
+          <Link to="/overview" className="nav-link">Overview</Link>
+          <Link to="/schedule" className="nav-link">Schedule</Link>
+          <Link to="/analytics" className="nav-link">Analytics</Link>
+          <Link to="/offer-upload" className="nav-link">Upload Offer</Link>
+        </nav>
+      </header>
 
       {/* Hero Section */}
       <div className="hero">
@@ -197,34 +239,37 @@ const Landing = () => {
       {/* Cards Section */}
       <div className="cards-section">
         <div className="card">
-          <div className="card-icon" style={{ color: "#28a745" }}>
-            📄
-          </div>
+          <div className="card-icon" style={{ color: "#28a745" }}>📄</div>
           <h2>Student Profiles</h2>
           <p>
             Explore student profiles, achievements, and portfolios to find the perfect candidates for your company.
           </p>
         </div>
-
         <div className="card">
-          <div className="card-icon" style={{ color: "#dc3545" }}>
-            🏢
-          </div>
+          <div className="card-icon" style={{ color: "#dc3545" }}>🏢</div>
           <h2>Company Profiles</h2>
           <p>
             Get to know top recruiting companies and their hiring needs through detailed, visually engaging profiles.
           </p>
         </div>
-
         <div className="card">
-          <div className="card-icon" style={{ color: "#ffc107" }}>
-            📅
-          </div>
+          <div className="card-icon" style={{ color: "#ffc107" }}>📅</div>
           <h2>Events & Workshops</h2>
           <p>
             Stay updated with workshops, placement drives, and training events designed to help students succeed.
           </p>
         </div>
+      </div>
+
+      {/* Team Section */}
+      <div className="team-section">
+        <h2>Our Team</h2>
+        <ul className="team-list">
+          <li>George</li>
+          <li>Riya</li>
+          <li>Keren</li>
+          <li>Yeshi</li>
+        </ul>
       </div>
 
       {/* Footer */}
@@ -233,6 +278,4 @@ const Landing = () => {
   );
 };
 
-
 export default Landing;
-
