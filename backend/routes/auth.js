@@ -1,6 +1,6 @@
 import express from 'express';
 import mongoose from 'mongoose';
-import bcrypt from 'bcrypt';
+import bcrypt from 'bcryptjs';
 
 var router = express.Router();
 
