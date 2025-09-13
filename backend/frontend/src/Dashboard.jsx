@@ -27,7 +27,7 @@ const StudentDetailsForm = ({ onSubmit }) => {
     }
 
     try {
-      const response = await fetch("https://placement-handler.onrender.com/dashboard", {
+      const response = await fetch("/api/students", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(student),
@@ -218,4 +218,5 @@ const Dashboard = () => {
 };
 
 export default Dashboard;
+
 
