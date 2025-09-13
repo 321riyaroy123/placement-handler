@@ -168,10 +168,10 @@ const Overview = () => {
         <h1>PLACEMENT OVERVIEW</h1>
         <nav>
           <ul className="nav-links">
-            <li><Link to="/dashboard">Dashboard</Link></li>
+            <li><Link to="/dashboard">Student Details</Link></li>
             <li><Link to="/schedule">Schedule</Link></li>
             <li><Link to="/analytics">Analytics</Link></li>
-            <li><Link to="/landing">Landing Page</Link></li>
+            <li><Link to="/landing">Dashboard</Link></li>
           </ul>
         </nav>
       </header>
@@ -216,5 +216,6 @@ const Overview = () => {
     </div>
   );
 };
+
 
 export default Overview;
