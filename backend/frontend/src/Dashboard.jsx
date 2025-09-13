@@ -1,6 +1,8 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
-const StudentDetails = () => {
+// Student Details Form Component
+const StudentDetailsForm = ({ onSubmit }) => {
   const [student, setStudent] = useState({
     studentName: "",
     registerNumber: "",
@@ -20,12 +22,14 @@ const StudentDetails = () => {
     e.preventDefault();
     setMessage("");
 
+    if (onSubmit) {
+      onSubmit(student);
+    }
+
     try {
       const response = await fetch("http://localhost:3000/studentdetails", {
-        method: "POST", // or PUT if updating
-        headers: {
-          "Content-Type": "application/json",
-        },
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(student),
       });
 
@@ -50,126 +54,167 @@ const StudentDetails = () => {
   };
 
   return (
-    <div style={{ fontFamily: "Arial, sans-serif", backgroundColor: "#FFE2E2", minHeight: "100vh" }}>
-      {/* Header */}
-      <div style={{
-        backgroundColor: "#6a0dad",
-        color: "white",
-        display: "flex",
-        justifyContent: "space-between",
-        padding: "15px 30px",
-        fontSize: "18px"
-      }}>
-        <div>PLACEMENT CELL</div>
-        <div>REGISTER COMPANY</div>
-      </div>
-
-      {/* Layout */}
-      <div style={{ display: "flex" }}>
-        {/* Sidebar */}
-        <div style={{
-          backgroundColor: "#FFE2E2",
-          padding: "20px",
-          width: "200px",
-          borderRight: "2px solid #7d7373",
-          minHeight: "calc(100vh - 60px)"
-        }}>
-          <a href="#" style={{ display: "block", marginBottom: "10px", fontWeight: "bold", color: "#000", textDecoration: "none" }}>Home</a>
-          <a href="#" style={{ display: "block", marginBottom: "10px", fontWeight: "bold", color: "#000", textDecoration: "none" }}>Dashboard</a>
-          <a href="/offer-upload" style={{ display: "block", marginBottom: "10px", fontWeight: "bold", color: "#000", textDecoration: "none" }}>Upload Offer Letter</a>
-        </div>
-
-        {/* Main content */}
-        <div style={{ flex: 1, padding: "30px" }}>
-          <h1 style={{ color: "#6a0dad" }}>Student Details</h1>
-
-          <form onSubmit={handleSubmit}>
-            <div style={{ marginBottom: "15px" }}>
-              <label style={{ display: "block", marginBottom: "5px", fontWeight: "bold" }}>Student Name</label>
-              <input
-                type="text"
-                name="studentName"
-                value={student.studentName}
-                onChange={handleChange}
-                style={{ width: "100%", padding: "8px", borderRadius: "4px", border: "1px solid #ccc" }}
-                required
-              />
-            </div>
-
-            <div style={{ marginBottom: "15px" }}>
-              <label style={{ display: "block", marginBottom: "5px", fontWeight: "bold" }}>Register Number</label>
-              <input
-                type="text"
-                name="registerNumber"
-                value={student.registerNumber}
-                onChange={handleChange}
-                style={{ width: "100%", padding: "8px", borderRadius: "4px", border: "1px solid #ccc" }}
-                required
-              />
-            </div>
-
-            <div style={{ marginBottom: "15px" }}>
-              <label style={{ display: "block", marginBottom: "5px", fontWeight: "bold" }}>10th Marks</label>
-              <input
-                type="text"
-                name="tenthMarks"
-                value={student.tenthMarks}
-                onChange={handleChange}
-                style={{ width: "100%", padding: "8px", borderRadius: "4px", border: "1px solid #ccc" }}
-              />
-            </div>
-
-            <div style={{ marginBottom: "15px" }}>
-              <label style={{ display: "block", marginBottom: "5px", fontWeight: "bold" }}>12th Marks</label>
-              <input
-                type="text"
-                name="twelfthMarks"
-                value={student.twelfthMarks}
-                onChange={handleChange}
-                style={{ width: "100%", padding: "8px", borderRadius: "4px", border: "1px solid #ccc" }}
-              />
-            </div>
-
-            <div style={{ marginBottom: "15px" }}>
-              <label style={{ display: "block", marginBottom: "5px", fontWeight: "bold" }}>Semester Results</label>
-              <input
-                type="text"
-                name="semesterResults"
-                value={student.semesterResults}
-                onChange={handleChange}
-                style={{ width: "100%", padding: "8px", borderRadius: "4px", border: "1px solid #ccc" }}
-              />
-            </div>
-
-            <div style={{ marginBottom: "15px" }}>
-              <label style={{ display: "block", marginBottom: "5px", fontWeight: "bold" }}>Consolidated Aggregate</label>
-              <input
-                type="text"
-                name="aggregate"
-                value={student.aggregate}
-                onChange={handleChange}
-                style={{ width: "100%", padding: "8px", borderRadius: "4px", border: "1px solid #ccc" }}
-              />
-            </div>
-
-            <button type="submit" style={{
-              backgroundColor: "#6a0dad",
-              color: "white",
-              border: "none",
-              padding: "10px 20px",
-              borderRadius: "5px",
-              cursor: "pointer",
-              fontSize: "16px"
-            }}>
-              Submit
-            </button>
-
-            {message && <p style={{ marginTop: "10px", color: "green", fontWeight: "bold" }}>{message}</p>}
-          </form>
-        </div>
-      </div>
+    <div className="form-card">
+      <form onSubmit={handleSubmit}>
+        {["studentName", "registerNumber", "tenthMarks", "twelfthMarks", "semesterResults", "aggregate"].map((field) => (
+          <div className="form-group" key={field}>
+            <label htmlFor={field}>{field.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase())}</label>
+            <input
+              type="text"
+              id={field}
+              name={field}
+              value={student[field]}
+              onChange={handleChange}
+              placeholder={`Enter ${field.replace(/([A-Z])/g, ' $1').toLowerCase()}`}
+              required={field === "studentName" || field === "registerNumber"}
+            />
+          </div>
+        ))}
+        <button type="submit" className="submit-button">Submit</button>
+        {message && <p className="success-message">{message}</p>}
+      </form>
     </div>
   );
 };
 
-export default StudentDetails;
+// Dashboard Component with Layout
+const Dashboard = () => {
+  return (
+    <>
+      <style>{`
+        body {
+          margin: 0;
+          font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+          overflow-x: hidden;
+          background-color: #f4f7f9;
+        }
+
+        .dashboard-container {
+          display: flex;
+          flex-direction: column;
+          min-height: 100vh;
+        }
+
+        /* Header */
+        .header {
+          background-color: #007bff;
+          color: white;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 1rem 2rem;
+        }
+        .logo { font-size: 1.5rem; font-weight: bold; }
+
+        .nav-link {
+          color: white;
+          text-decoration: none;
+          padding: 0.5rem 1rem;
+          border-radius: 5px;
+        }
+
+        .nav-link:hover { background-color: rgba(255, 255, 255, 0.2); }
+
+        /* Layout */
+        .main-layout { display: flex; flex: 1; }
+
+        .sidebar {
+          width: 220px;
+          min-width: 180px;
+          background-color: #fff;
+          border-right: 1px solid #e0e6ed;
+          display: flex;
+          flex-direction: column;
+          padding: 1.5rem 1rem;
+        }
+
+        .sidebar-link {
+          padding: 0.75rem 1rem;
+          margin-bottom: 0.5rem;
+          text-decoration: none;
+          color: #555;
+          border-radius: 6px;
+        }
+
+        .sidebar-link:hover { background-color: #e9f5ff; color: #007bff; }
+        .sidebar-link.active { background-color: #007bff; color: white; }
+
+        .main-content {
+          flex: 1;
+          padding: 2rem;
+          overflow-x: hidden;
+        }
+
+        .main-title { font-size: 1.8rem; color: #0056b3; margin-bottom: 1.5rem; }
+
+        /* Form Card */
+        .form-card {
+          background-color: #fff;
+          padding: 2rem;
+          border-radius: 10px;
+          box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+
+        .form-group { margin-bottom: 1.5rem; }
+        label { display: block; margin-bottom: 0.5rem; font-weight: 600; color: #444; }
+        input[type="text"] {
+          width: 100%;
+          padding: 0.75rem;
+          border: 1px solid #ccc;
+          border-radius: 6px;
+          font-size: 1rem;
+        }
+        input[type="text"]:focus {
+          outline: none;
+          border-color: #007bff;
+          box-shadow: 0 0 0 3px rgba(0,123,255,0.25);
+        }
+
+        .submit-button {
+          background-color: #28a745;
+          color: white;
+          border: none;
+          padding: 0.75rem 1.5rem;
+          border-radius: 6px;
+          cursor: pointer;
+          font-weight: 600;
+        }
+        .submit-button:hover { background-color: #218838; }
+
+        .success-message { margin-top: 10px; color: green; font-weight: bold; }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+          .main-layout { flex-direction: column; }
+          .sidebar { width: 100%; border-right: none; border-bottom: 1px solid #e0e6ed; }
+        }
+      `}</style>
+
+      <div className="dashboard-container">
+        <header className="header">
+          <div className="logo">PLACEMENT CELL</div>
+          <nav>
+            <Link to="/overview" className="nav-link">Overview</Link>
+          </nav>
+        </header>
+
+        <div className="main-layout">
+          <aside className="sidebar">
+            <Link to="/schedule" className="sidebar-link">Schedule</Link>
+            <Link to="/analytics" className="sidebar-link">Analytics</Link>
+            <Link to="/landing" className="sidebar-link">Dashboard</Link>
+            <Link to="/offer-upload" className="sidebar-link">Offer Letters</Link>
+
+          </aside>
+
+          <main className="main-content">
+            <h1 className="main-title">Student Details</h1>
+            <StudentDetailsForm />
+          </main>
+        </div>
+      </div>
+    </>
+  );
+};
+
+export default Dashboard;
