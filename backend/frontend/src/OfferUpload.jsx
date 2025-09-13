@@ -30,7 +30,7 @@ const OfferLettersForm = () => {
     formData.append("offerLetter", offer.offerLetter);
 
     try {
-      const response = await fetch("http://localhost:3000/offerletters", {
+      const response = await fetch("/api/offers", {
         method: "POST",
         body: formData
       });
