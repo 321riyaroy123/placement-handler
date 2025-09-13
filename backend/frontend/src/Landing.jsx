@@ -269,7 +269,7 @@ const Landing = () => {
           <li>Riya Roy</li>
           <li>Keren John</li>
           <li>Yeshi Tenzin</li>
-        </ul><br></br>
+        </ul>
         <ul className="team-list">
           <li>2360371</li>
           <li>2360449</li>
@@ -285,4 +285,5 @@ const Landing = () => {
 };
 
 export default Landing;
+
 
