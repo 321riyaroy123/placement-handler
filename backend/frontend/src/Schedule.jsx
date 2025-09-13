@@ -5,74 +5,197 @@ const Schedule = () => {
   return (
     <div className="schedule-page">
       <style>{`
+        /* General Body & Layout Styles */
         body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background-color: #FFE2E2;
-    }
+          margin: 0;
+          font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+          background-color: #f4f7f9;
+          color: #333;
+          width:100vw;
+        }
 
-    .header {
-      background-color: #6a0dad;
-      color: white;
-      display: flex;
-      justify-content: space-between;
-      padding: 15px 30px;
-      font-size: 18px;
-    }
+        .schedule-page {
+          display: flex;
+          flex-direction: column;
+          min-height: 100vh;
+          width:100vw;
+        }
+        
+        /* Header */
+        .header {
+          background-color: #007bff;
+          color: white;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 1.5rem 3vw;
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
 
-    .sidebar {
-      background-color: #FFE2E2;
-      padding: 20px;
-      width: 200px;
-      height: 100vh;
-      position: fixed;
-      border-right: 2px solid #7d7373;
-    }
+        .logo {
+          font-size: 1.8vw;
+          font-weight: 600;
+          letter-spacing: 1px;
+        }
 
-    .sidebar a {
-      display: block;
-      margin-bottom: 10px;
-      text-decoration: none;
-      color: #000;
-      font-weight: bold;
-    }
+        .nav-link {
+          color: white;
+          text-decoration: none;
+          font-size: 1vw;
+          font-weight: 500;
+          padding: 0.5rem 1rem;
+          transition: background-color 0.3s, color 0.3s;
+          border-radius: 5px;
+        }
 
-    .sidebar a.active {
-      color: #6a0dad;
-      text-decoration: underline;
-    }
+        .nav-link:hover {
+          background-color: rgba(255, 255, 255, 0.2);
+        }
 
-    .main {
-      margin-left: 220px;
-      padding: 40px;
-    }
+        /* Main Content Layout */
+        .main-layout {
+          display: flex;
+          flex: 1;
+        }
 
-    h2 {
-      color: #6a0dad;
-      margin-bottom: 20px;
-    }
+        /* Sidebar */
+        .sidebar {
+          width: 20vw;
+          min-width: 200px;
+          background-color: #fff;
+          padding: 2rem 0;
+          border-right: 1px solid #e0e6ed;
+          box-shadow: 2px 0 5px rgba(0, 0, 0, 0.05);
+          display: flex;
+          flex-direction: column;
+        }
 
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      background: white;
-      box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
-    }
+        .sidebar-nav {
+          display: flex;
+          flex-direction: column;
+          padding: 0 1.5rem;
+        }
 
-    th, td {
-      padding: 12px 15px;
-      text-align: left;
-      border-bottom: 1px solid #ddd;
-    }
+        .sidebar-link {
+          display: flex;
+          align-items: center;
+          padding: 0.75rem 1rem;
+          margin-bottom: 0.5rem;
+          text-decoration: none;
+          color: #555;
+          font-size: 1.1vw;
+          min-height: 30px;
+          font-weight: 500;
+          border-radius: 8px;
+          transition: background-color 0.3s, color 0.3s;
+        }
 
-    th {
-      background-color: #6a0dad;
-      color: white;
-    }
+        .sidebar-link:hover {
+          background-color: #e9f5ff;
+          color: #007bff;
+        }
 
-    tr:hover {
-      background-color: #f3d9ff;
-    }
+        .sidebar-link.active {
+          background-color: #007bff;
+          color: white;
+          box-shadow: 0 4px 6px rgba(0, 123, 255, 0.2);
+        }
+
+        /* Main Content Area */
+        .main-content {
+          flex: 1;
+          padding: 2rem;
+          overflow-y: auto;
+        }
+
+        .main-title {
+          color: #0056b3;
+          margin-bottom: 1.5rem;
+          font-size: 2.2vw;
+          font-weight: 600;
+          min-height: 25px;
+        }
+
+        /* Table Styles */
+        .schedule-table-container {
+          background-color: #fff;
+          border-radius: 10px;
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+          overflow: hidden; /* Ensures rounded corners are applied to table */
+          width: 100%;
+          max-width: 900px;
+          margin: auto;
+        }
+        
+        .schedule-table {
+          width: 100%;
+          border-collapse: collapse;
+        }
+
+        .schedule-table th, .schedule-table td {
+          padding: 1.25rem 1.5rem;
+          text-align: left;
+          border-bottom: 1px solid #e0e6ed;
+        }
+
+        .schedule-table th {
+          background-color: #007bff;
+          color: white;
+          font-weight: 600;
+          letter-spacing: 0.5px;
+        }
+
+        .schedule-table tbody tr:hover {
+          background-color: #f3f8ff;
+          cursor: pointer;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+          .header {
+            flex-direction: column;
+            padding: 1rem;
+          }
+
+          .logo {
+            font-size: 5vw;
+          }
+
+          .nav-link {
+            font-size: 3vw;
+            margin-top: 10px;
+          }
+
+          .main-layout {
+            flex-direction: column;
+          }
+
+          .sidebar {
+            width: 100%;
+            border-right: none;
+            border-bottom: 1px solid #e0e6ed;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+          }
+
+          .sidebar-nav {
+            flex-direction: row;
+            justify-content: space-around;
+            padding: 1rem 0;
+          }
+
+          .sidebar-link {
+            font-size: 3vw;
+            min-height: auto;
+          }
+
+          .main-content {
+            padding: 1rem;
+          }
+
+          .main-title {
+            font-size: 6vw;
+          }
+        }
       `}</style>
       
       {/* Top Header */}
@@ -137,6 +260,7 @@ const Schedule = () => {
 
 
 export default Schedule;
+
 
 
 
