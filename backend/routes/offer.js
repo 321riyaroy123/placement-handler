@@ -1,11 +1,33 @@
-import mongoose from "mongoose";
+import express from "express";
+import multer from "multer";
+import Offer from "../models/Offer.js";
+import path from "path";
+import { fileURLToPath } from "url";
 
-const OfferSchema = new mongoose.Schema({
-  studentName: { type: String, required: true },
-  registerNumber: { type: String, required: true },
-  companyName: { type: String, required: true },
-  offerDate: { type: Date, required: true },
-  offerLetter: { type: String, required: true } // store filename or URL
-}, { timestamps: true });
+const router = express.Router();
 
-export default mongoose.model("Offer", OfferSchema);
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => cb(null, path.join(__dirname, "../uploads")),
+  filename: (req, file, cb) => cb(null, Date.now() + "_" + file.originalname)
+});
+const upload = multer({ storage });
+
+router.post("/", upload.single("offerLetter"), async (req, res) => {
+  try {
+    const { studentName, registerNumber, companyName, offerDate } = req.body;
+    const offerLetter = req.file.filename;
+
+    const offer = new Offer({ studentName, registerNumber, companyName, offerDate, offerLetter });
+    await offer.save();
+
+    res.status(201).json({ message: "Offer uploaded successfully" });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Server error" });
+  }
+});
+
+export default router;
