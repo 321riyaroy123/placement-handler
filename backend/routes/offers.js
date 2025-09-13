@@ -5,9 +5,8 @@ import Offer from "../models/Offer.js";
 
 const router = express.Router();
 
-// Multer config
 const storage = multer.diskStorage({
-  destination: (req, file, cb) => cb(null, "uploads/"),
+  destination: (req, file, cb) => cb(null, path.join(process.cwd(), "uploads")),
   filename: (req, file, cb) => cb(null, Date.now() + path.extname(file.originalname)),
 });
 
