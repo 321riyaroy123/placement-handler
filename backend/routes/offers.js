@@ -1,32 +1,27 @@
-import express from "express";
-import multer from "multer";
-import Offer from "../models/Offer.js";
-import path from "path";
-import { fileURLToPath } from "url";
+import express from 'express';
+import multer from 'multer';
+import path from 'path';
+import Offer from '../models/Offer.js';
 
 const router = express.Router();
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
+// Multer config
 const storage = multer.diskStorage({
-  destination: (req, file, cb) => cb(null, path.join(__dirname, "../uploads")),
-  filename: (req, file, cb) => cb(null, Date.now() + "_" + file.originalname)
+  destination: (req, file, cb) => cb(null, 'uploads/'),
+  filename: (req, file, cb) => cb(null, Date.now() + path.extname(file.originalname))
 });
 const upload = multer({ storage });
 
-router.post("/", upload.single("offerLetter"), async (req, res) => {
+router.post('/', upload.single('offerLetter'), async (req, res) => {
   try {
-    const { studentName, registerNumber, companyName, offerDate } = req.body;
-    const offerLetter = req.file.filename;
-
-    const offer = new Offer({ studentName, registerNumber, companyName, offerDate, offerLetter });
+    const offer = new Offer({
+      ...req.body,
+      offerLetterPath: req.file.path
+    });
     await offer.save();
-
-    res.status(201).json({ message: "Offer uploaded successfully" });
+    res.status(201).json(offer);
   } catch (err) {
-    console.error(err);
-    res.status(500).json({ message: "Server error" });
+    res.status(400).json({ error: err.message });
   }
 });
 
