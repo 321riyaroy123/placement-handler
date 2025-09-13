@@ -8,7 +8,7 @@ import Analytics from "./Analytics";
 import Overview from "./Overview";
 import Schedule from "./Schedule";
 import Register from "./Register";
-import OfferUpload from "./OfferUpload"; // ✅ make sure this file exists
+import OfferUpload from "./offerUpload"; // ✅ make sure this file exists
 
 function App() {
   return (
