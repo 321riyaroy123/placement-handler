@@ -1,50 +1,45 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
-const OfferUpload = () => {
-  const [formData, setFormData] = useState({
-    studentName: "",
-    registerNumber: "",
-    companyName: "",
-    offerDate: "",
-    offerLetter: null
-  });
-
+const OfferLetters = () => {
+  const [company, setCompany] = useState("");
+  const [role, setRole] = useState("");
+  const [file, setFile] = useState(null);
   const [message, setMessage] = useState("");
-  const [error, setError] = useState("");
 
-  const handleChange = (e) => {
-    if (e.target.name === "offerLetter") {
-      setFormData({ ...formData, offerLetter: e.target.files[0] });
-    } else {
-      setFormData({ ...formData, [e.target.name]: e.target.value });
-    }
-  };
-
-  const handleSubmit = async (e) => {
+  const handleUpload = async (e) => {
     e.preventDefault();
-    setMessage("");
-    setError("");
+    if (!company || !role || !file) {
+      setMessage("Please fill all fields and select a file.");
+      return;
+    }
 
-    const data = new FormData();
-    Object.keys(formData).forEach(key => data.append(key, formData[key]));
+    const formData = new FormData();
+    formData.append("company", company);
+    formData.append("role", role);
+    formData.append("offerLetter", file);
 
     try {
-      const res = await fetch("https://placement-handler.onrender.com/api/offers", {
+      const response = await fetch("http://localhost:3000/offerletters", {
         method: "POST",
-        body: data
+        body: formData,
       });
-      const result = await res.json();
-      if (res.ok) setMessage(result.message);
-      else setError(result.error || "Failed to upload offer");
+      const data = await response.json();
+      if (response.ok) {
+        setMessage("Offer letter uploaded successfully!");
+        setCompany("");
+        setRole("");
+        setFile(null);
+      } else {
+        setMessage(data.msg || "Upload failed.");
+      }
     } catch (err) {
-      console.error(err);
-      setError("Server error");
+      setMessage("Error uploading offer letter.");
     }
   };
 
   return (
-    <div className="dashboard-container">
+    <div className="offer-page">
       <style>{`
         body {
           margin: 0;
@@ -52,12 +47,7 @@ const OfferUpload = () => {
           background-color: #f4f7f9;
         }
 
-        .dashboard-container {
-          display: flex;
-          flex-direction: column;
-          min-height: 100vh;
-        }
-
+        /* Header */
         .header {
           background-color: #007bff;
           color: white;
@@ -65,37 +55,52 @@ const OfferUpload = () => {
           justify-content: space-between;
           align-items: center;
           padding: 1.5rem 3vw;
-          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+          box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
 
-        .logo { font-size: 1.8vw; font-weight: 600; }
+        .logo {
+          font-size: 1.8vw;
+          font-weight: 600;
+        }
 
         .nav-link {
           color: white;
           text-decoration: none;
           font-size: 1vw;
           font-weight: 500;
-          padding: 0.5rem 1rem;
-          border-radius: 5px;
-          transition: background-color 0.3s;
         }
 
-        .nav-link:hover { background-color: rgba(255,255,255,0.2); }
+        .nav-link:hover {
+          text-decoration: underline;
+        }
 
-        .main-layout { display: flex; flex: 1; }
+        /* Layout */
+        .main-layout {
+          display: flex;
+          min-height: 100vh;
+        }
 
+        /* Sidebar */
         .sidebar {
           width: 20vw;
           min-width: 200px;
           background-color: #fff;
           padding: 2rem 0;
           border-right: 1px solid #e0e6ed;
-          box-shadow: 2px 0 5px rgba(0, 0, 0, 0.05);
+          box-shadow: 2px 0 5px rgba(0,0,0,0.05);
           display: flex;
           flex-direction: column;
         }
 
-        .sidebar a {
+        .sidebar-nav {
+          display: flex;
+          flex-direction: column;
+          padding: 0 1.5rem;
+        }
+
+        .sidebar-link {
+          display: flex;
+          align-items: center;
           padding: 0.75rem 1rem;
           margin-bottom: 0.5rem;
           text-decoration: none;
@@ -106,113 +111,176 @@ const OfferUpload = () => {
           transition: background-color 0.3s, color 0.3s;
         }
 
-        .sidebar a:hover { background-color: #e9f5ff; color: #007bff; }
+        .sidebar-link:hover {
+          background-color: #e9f5ff;
+          color: #007bff;
+        }
 
+        .sidebar-link.active {
+          background-color: #007bff;
+          color: white;
+          box-shadow: 0 4px 6px rgba(0,123,255,0.2);
+        }
+
+        /* Main content */
         .main-content {
           flex: 1;
           padding: 2rem;
           overflow-y: auto;
         }
 
-        .main-title { color: #0056b3; font-size: 2.2vw; font-weight: 600; margin-bottom: 1rem; }
-
-        .form-card {
-          background-color: #fff;
-          padding: 2rem;
-          border-radius: 10px;
-          box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        .main-title {
+          font-size: 2.2vw;
+          font-weight: 600;
+          color: #0056b3;
+          margin-bottom: 1.5rem;
         }
 
-        .form-group { margin-bottom: 1.5rem; }
+        /* Form card */
+        .form-card {
+          background: white;
+          border-radius: 12px;
+          padding: 2rem;
+          max-width: 500px;
+          box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+          margin: auto;
+        }
 
-        label { display: block; margin-bottom: 0.5rem; font-weight: 600; color: #444; }
+        .form-group {
+          margin-bottom: 1.5rem;
+        }
 
-        input[type="text"], input[type="date"], input[type="file"] {
+        .form-group label {
+          display: block;
+          margin-bottom: 0.5rem;
+          font-weight: 600;
+        }
+
+        .form-group input {
           width: 100%;
           padding: 0.75rem;
-          border: 1px solid #ccc;
-          border-radius: 6px;
+          border: 1px solid #ddd;
+          border-radius: 8px;
           font-size: 1rem;
+          box-sizing: border-box;
         }
 
-        input[type="text"]:focus, input[type="date"]:focus, input[type="file"]:focus {
-          outline: none;
-          border-color: #007bff;
-          box-shadow: 0 0 0 3px rgba(0,123,255,0.25);
+        .form-group input[type="file"] {
+          padding: 0.25rem;
         }
 
-        .submit-button {
+        .upload-button {
+          width: 100%;
+          padding: 0.75rem;
           background-color: #28a745;
           color: white;
           border: none;
-          padding: 0.75rem 1.5rem;
-          border-radius: 6px;
-          cursor: pointer;
-          font-size: 1rem;
           font-weight: 600;
-          transition: background-color 0.3s;
+          font-size: 1.1rem;
+          border-radius: 8px;
+          cursor: pointer;
+          transition: background 0.3s, transform 0.2s;
         }
 
-        .submit-button:hover { background-color: #218838; }
+        .upload-button:hover {
+          background-color: #218838;
+          transform: translateY(-2px);
+        }
 
-        .message { color: green; margin-top: 1rem; font-weight: 600; }
-        .error { color: red; margin-top: 1rem; font-weight: 600; }
+        .message {
+          margin-top: 1rem;
+          color: red;
+          font-weight: 500;
+        }
 
         @media (max-width: 768px) {
-          .header { flex-direction: column; padding: 1rem; }
-          .logo { font-size: 5vw; }
-          .sidebar { width: 100%; border-right: none; border-bottom: 1px solid #e0e6ed; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
-          .sidebar a { font-size: 3vw; }
-          .main-layout { flex-direction: column; }
-          .main-title { font-size: 6vw; }
+          .sidebar {
+            width: 100%;
+            border-right: none;
+            border-bottom: 1px solid #e0e6ed;
+            flex-direction: row;
+            justify-content: space-around;
+            padding: 1rem 0;
+          }
+
+          .sidebar-nav {
+            flex-direction: row;
+            width: 100%;
+            justify-content: space-around;
+            padding: 0;
+          }
+
+          .sidebar-link {
+            font-size: 3vw;
+            margin-bottom: 0;
+          }
+
+          .main-title {
+            font-size: 6vw;
+          }
         }
       `}</style>
 
-      <header className="header">
+      {/* Header */}
+      <div className="header">
         <div className="logo">PLACEMENT CELL</div>
-        <nav className="nav">
-          <Link to="/dashboard" className="nav-link">Dashboard</Link>
+        <div>
           <Link to="/overview" className="nav-link">Overview</Link>
-        </nav>
-      </header>
+        </div>
+      </div>
 
       <div className="main-layout">
-        <div className="sidebar">
-          <Link to="/dashboard">Dashboard</Link>
-          <Link to="/schedule">Schedule</Link>
-          <Link to="/analytics">Analytics</Link>
-          <Link to="/offer-upload">Offer Letters</Link>
-          <Link to="/landing">Landing Page</Link>
-        </div>
+        {/* Sidebar */}
+        <aside className="sidebar">
+          <nav className="sidebar-nav">
+            <Link to="/dashboard" className="sidebar-link">Student Details</Link>
+            <Link to="/offerletters" className="sidebar-link active">Offer Letters</Link>
+            <Link to="/schedule" className="sidebar-link">Schedule</Link>
+            <Link to="/analytics" className="sidebar-link">Analytics</Link>
+            <Link to="/landing" className="sidebar-link">Dashboard</Link>
+          </nav>
+        </aside>
 
+        {/* Main Content */}
         <main className="main-content">
-          <h1 className="main-title">Upload Placement Offer</h1>
+          <h2 className="main-title">Upload Offer Letters</h2>
           <div className="form-card">
-            <form onSubmit={handleSubmit} encType="multipart/form-data">
-              <div className="form-group">
-                <label>Student Name</label>
-                <input type="text" name="studentName" onChange={handleChange} required />
-              </div>
-              <div className="form-group">
-                <label>Register Number</label>
-                <input type="text" name="registerNumber" onChange={handleChange} required />
-              </div>
+            <form onSubmit={handleUpload}>
               <div className="form-group">
                 <label>Company</label>
-                <input type="text" name="companyName" onChange={handleChange} required />
+                <input
+                  type="text"
+                  value={company}
+                  onChange={(e) => setCompany(e.target.value)}
+                  placeholder="Enter company name"
+                  required
+                />
               </div>
+
               <div className="form-group">
-                <label>Offer Date</label>
-                <input type="date" name="offerDate" onChange={handleChange} required />
+                <label>Role</label>
+                <input
+                  type="text"
+                  value={role}
+                  onChange={(e) => setRole(e.target.value)}
+                  placeholder="Enter role"
+                  required
+                />
               </div>
+
               <div className="form-group">
                 <label>Offer Letter</label>
-                <input type="file" name="offerLetter" onChange={handleChange} required />
+                <input
+                  type="file"
+                  onChange={(e) => setFile(e.target.files[0])}
+                  accept=".pdf,.doc,.docx"
+                  required
+                />
               </div>
-              <button type="submit" className="submit-button">Upload</button>
-              {message && <div className="message">{message}</div>}
-              {error && <div className="error">{error}</div>}
+
+              <button type="submit" className="upload-button">Upload</button>
             </form>
+            {message && <p className="message">{message}</p>}
           </div>
         </main>
       </div>
@@ -220,4 +288,4 @@ const OfferUpload = () => {
   );
 };
 
-export default OfferUpload;
+export default OfferLetters;
