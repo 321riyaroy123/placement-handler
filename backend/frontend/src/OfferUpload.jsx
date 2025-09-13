@@ -39,6 +39,32 @@ const OfferUpload = () => {
   };
 
   return (
+    <style>{`
+  body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f7f9;
+    color: #333;
+  }
+
+  .dashboard-container { display: flex; flex-direction: column; min-height: 100vh; width: 100vw; }
+  .header { background-color: #007bff; color: white; display: flex; justify-content: space-between; align-items: center; padding: 1.5rem 3vw; }
+  .logo { font-size: 1.8vw; font-weight: 600; letter-spacing: 1px; }
+  .nav { display: flex; gap: 1.5rem; }
+  .nav-link { color: white; text-decoration: none; font-size: 1vw; font-weight: 500; padding: 0.5rem 1rem; border-radius: 5px; }
+  .main-layout { display: flex; flex: 1; }
+  .sidebar { width: 20vw; min-width: 200px; background-color: #fff; padding: 2rem 0; border-right: 1px solid #e0e6ed; display: flex; flex-direction: column; }
+  .sidebar a { margin: 0.5rem 0; color: #555; text-decoration: none; }
+  .main-content { flex: 1; padding: 2rem; }
+  .main-title { color: #0056b3; margin-bottom: 1.5rem; font-size: 2.2vw; font-weight: 600; }
+  .form-card { background-color: #fff; padding: 2rem; border-radius: 10px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); }
+  .form-group { margin-bottom: 1.5rem; }
+  label { display: block; margin-bottom: 0.5rem; font-weight: 600; color: #444; }
+  input[type="text"], input[type="date"], input[type="file"] { width: 100%; padding: 0.75rem; border: 1px solid #ccc; border-radius: 6px; }
+  .submit-button { background-color: #28a745; color: white; border: none; padding: 0.75rem 1.5rem; border-radius: 6px; cursor: pointer; font-size: 1rem; font-weight: 600; }
+  .submit-button:hover { background-color: #218838; }
+`}</style>
+
     <div className="dashboard-container">
       <header className="header">
         <div className="logo">PLACEMENT CELL</div>
