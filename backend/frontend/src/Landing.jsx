@@ -265,10 +265,16 @@ const Landing = () => {
       <div className="team-section">
         <h2>Our Team</h2>
         <ul className="team-list">
-          <li>George</li>
-          <li>Riya</li>
-          <li>Keren</li>
-          <li>Yeshi</li>
+          <li>George Michael</li>
+          <li>Riya Roy</li>
+          <li>Keren John</li>
+          <li>Yeshi Tenzin</li>
+        </ul><br></br>
+        <ul className="team-list">
+          <li>2360371</li>
+          <li>2360449</li>
+          <li>2362341</li>
+          <li>23460483</li>
         </ul>
       </div>
 
@@ -279,3 +285,4 @@ const Landing = () => {
 };
 
 export default Landing;
+
