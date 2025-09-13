@@ -6,9 +6,9 @@ import cors from "cors";
 import { fileURLToPath } from "url";
 
 // Import routes
-import authRouter from "./routes/auth.js";
-import offerRouter from "./routes/offers.js";
-import studentRouter from "./routes/students.js";
+import authRouter from "./backend/routes/auth.js";
+import offerRouter from "./backend/routes/offers.js";
+import studentRouter from "./backend/routes/students.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -25,7 +25,7 @@ app.use(cors());
 // -------------------------
 // Serve React frontend
 // -------------------------
-const frontendPath = path.join(__dirname, "../frontend/dist");
+const frontendPath = path.join(__dirname, "../backend/frontend/dist");
 app.use(express.static(frontendPath));
 
 // API routes
