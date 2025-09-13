@@ -3,21 +3,33 @@ import { Link } from "react-router-dom";
 
 const handleSubmit = async (e) => {
   e.preventDefault();
-  const data = {
-    studentName, registerNumber, tenthMarks, twelfthMarks, semesterResults, aggregate
+
+  const studentData = {
+    studentName: e.target.studentName.value,
+    registerNumber: e.target.registerNumber.value,
+    tenthMarks: e.target.tenthMarks.value,
+    twelfthMarks: e.target.twelfthMarks.value,
+    semesterResults: e.target.semesterResults.value,
+    aggregate: e.target.aggregate.value,
   };
+
   try {
-    await fetch('/api/students', {
+    const res = await fetch('https://placement-handler.onrender.com/api/students', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data)
+      body: JSON.stringify(studentData),
     });
-    alert('Student saved successfully!');
+
+    const data = await res.json();
+
+    if (res.ok) alert("Student saved successfully!");
+    else alert(data.error || "Failed to save student");
   } catch (err) {
     console.error(err);
-    alert('Error saving student');
+    alert("Server error");
   }
 };
+
 
 const Dashboard = () => {
   const handleSubmit = (e) => {
@@ -306,4 +318,5 @@ const Dashboard = () => {
 
 
 export default Dashboard;
+
 
