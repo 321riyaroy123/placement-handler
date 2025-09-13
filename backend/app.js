@@ -24,6 +24,9 @@ app.use("/api/students", studentRouter);
 const frontendPath = path.join(__dirname, "frontend", "dist");
 app.use(express.static(frontendPath));
 
+// Serve uploaded files statically
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
+
 // SPA fallback
 app.get("*", (req, res) => {
   res.sendFile(path.join(frontendPath, "index.html"));
