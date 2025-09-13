@@ -12,5 +12,5 @@ export default defineConfig({
       '@': path.resolve(__dirname, 'src'),
     },
   },
-  base: './', // important for serving from Express
+  base: '/', // ✅ fix: assets always load correctly
 });
