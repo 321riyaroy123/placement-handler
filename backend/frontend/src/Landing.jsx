@@ -174,14 +174,17 @@ const Landing = () => {
 
       {/* Header */}
       <header className="header">
-        <div className="logo">Placement Cell</div>
-        <nav className="nav">
-          <Link to="/dashboard" className="nav-link">Dashboard</Link>
-          <Link to="/overview" className="nav-link">Overview</Link>
-          <Link to="/schedule" className="nav-link">Schedule</Link>
-          <Link to="/analytics" className="nav-link">Analytics</Link>
-        </nav>
-      </header>
+  <div className="logo">Placement Cell</div>
+  <nav className="nav">
+    <Link to="/dashboard" className="nav-link">Dashboard</Link>
+    <Link to="/overview" className="nav-link">Overview</Link>
+    <Link to="/schedule" className="nav-link">Schedule</Link>
+    <Link to="/analytics" className="nav-link">Analytics</Link>
+    {/* New navigation link */}
+    <Link to="/offer-upload" className="nav-link">Upload Offer</Link>
+  </nav>
+</header>
+
 
       {/* Hero Section */}
       <div className="hero">
@@ -229,5 +232,6 @@ const Landing = () => {
     </div>
   );
 };
+
 
 export default Landing;
