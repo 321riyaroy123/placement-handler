@@ -78,4 +78,20 @@ const OfferLetters = () => {
               <input type="text" name="companyName" value={offer.companyName} onChange={handleChange} placeholder="Enter company name" required/>
             </div>
             <div className="form-group">
-              <label>Date of
+              <label>Date of Offer</label>
+              <input type="date" name="offerDate" value={offer.offerDate} onChange={handleChange} required/>
+            </div>
+            <div className="form-group">
+              <label>Offer Letter</label>
+              <input type="file" name="offerLetter" onChange={handleChange} accept=".pdf,.doc,.docx" required/>
+            </div>
+            <button type="submit" className="submit-button">Upload</button>
+            {message && <p className="message">{message}</p>}
+          </form>
+        </div>
+      </main>
+    </div>
+  );
+};
+
+export default OfferLetters;
