@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Placement Cell Landing</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #FFE2E2; /* consistent with other pages */
+      color: #1c1c1c;
+    }
+    /* Header ribbon */
+    .ribbon {
+      background-color: #6a0dad; /* purple */
+      height: 80px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 40px;
+      box-shadow: 0px 3px 6px rgba(0,0,0,0.2);
+    }
+    .ribbon .home {
+      font-size: 24px;
+      font-weight: bold;
+      color: white;
+    }
+    .ribbon .nav {
+      display: flex;
+      gap: 25px;
+    }
+    .ribbon .nav a {
+      color: white;
+      font-weight: bold;
+      text-decoration: none;
+      font-size: 16px;
+      transition: color 0.3s ease;
+    }
+    .ribbon .nav a:hover {
+      color: #f9df75;
+    }
+
+    /* Hero Section */
+    .hero {
+      text-align: center;
+      padding: 60px 20px 40px;
+    }
+    .hero h1 {
+      font-size: 48px;
+      font-weight: bolder;
+      color: #6a0dad;
+      margin-bottom: 15px;
+    }
+    .hero p {
+      font-size: 18px;
+      color: #333;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    /* Cards Section */
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      padding: 40px;
+    }
+    .card {
+      background-color: white;
+      border-radius: 15px;
+      box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
+      padding: 25px;
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0px 6px 14px rgba(0,0,0,0.2);
+    }
+    .card-icon {
+      height: 100px;
+      width: 100px;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-weight: bold;
+      color: white;
+      margin: 0 auto 15px;
+      font-size: 20px;
+    }
+    .card h2 {
+      font-size: 22px;
+      color: #6a0dad;
+      margin-bottom: 10px;
+    }
+    .card p {
+      font-size: 15px;
+      color: #444;
+      line-height: 1.5;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 15px;
+      background-color: #6a0dad;
+      color: white;
+      margin-top: 30px;
+    }
+  </style>
+</head>
+<body>
+  <div class="full">
+    <!-- Header -->
+    <div class="ribbon">
+      <div class="home">Placement Cell</div>
+      <div class="nav">
+        <a href="dashboard.html">Dashboard</a>
+        <a href="overview.html">Overview</a>
+        <a href="schedule.html">Schedule</a>
+        <a href="analytics.html">Analytics</a>
+      </div>
+    </div>
+
+    <!-- Hero Section -->
+    <div class="hero">
+      <h1>Welcome to the Placement Cell</h1>
+      <p>Connecting students with top companies, empowering careers, and organizing events to build a brighter professional future.</p>
+    </div>
+
+    <!-- Cards Section -->
+    <div class="cards">
+      <div class="card">
+        <div class="card-icon" style="background-color: #87ef9a;">📄</div>
+        <h2>Student Posters</h2>
+        <p>Explore student profiles, achievements, and posters highlighting their skills and aspirations.</p>
+      </div>
+
+      <div class="card">
+        <div class="card-icon" style="background-color: #fe8686;">🏢</div>
+        <h2>Company Posters</h2>
+        <p>Get to know top recruiting companies and their hiring needs through visually engaging posters.</p>
+      </div>
+
+      <div class="card">
+        <div class="card-icon" style="background-color: #f076ef;">📅</div>
+        <h2>Event Posters</h2>
+        <p>Stay updated with workshops, placement drives, and training events designed for student success.</p>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+      © 2025 Placement Cell | Christ University
+    </footer>
+  </div>
+</body>
+</html>
