@@ -2,8 +2,12 @@ import express from "express";
 import multer from "multer";
 import path from "path";
 import Offer from "../models/Offer.js";
+import fs from "fs";
 
 const router = express.Router();
+
+const uploadDir = path.join(process.cwd(), "uploads");
+if (!fs.existsSync(uploadDir)) fs.mkdirSync(uploadDir);
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => cb(null, path.join(process.cwd(), "uploads")),
