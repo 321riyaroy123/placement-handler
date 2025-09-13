@@ -42,11 +42,11 @@ const Dashboard = () => {
       {/* Sidebar */}
 <aside className="sidebar">
   <nav className="sidebar-nav">
-    <Link to="/dashboard" className="sidebar-link">Dashboard</Link>
-    <Link to="/student-details" className="sidebar-link active">Student Details</Link>
     <Link to="/schedule" className="sidebar-link">Schedule</Link>
     <Link to="/analytics" className="sidebar-link">Analytics</Link>
-    <Link to="/landing" className="sidebar-link">Landing Page</Link>
+    <Link to="/landing" className="sidebar-link">Dashboard</Link>
+        <Link to="/offer-upload" className="sidebar-link">Offer Letters</Link>
+
   </nav>
 </aside>
 
@@ -184,6 +184,7 @@ const Dashboard = () => {
 
 
 export default Dashboard;
+
 
 
 
