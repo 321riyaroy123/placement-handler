@@ -2,39 +2,49 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 const OfferLetters = () => {
-  const [company, setCompany] = useState("");
-  const [role, setRole] = useState("");
-  const [file, setFile] = useState(null);
+  const [offer, setOffer] = useState({
+    studentName: "",
+    company: "",
+    role: "",
+    file: null
+  });
   const [message, setMessage] = useState("");
 
-  const handleUpload = async (e) => {
-    e.preventDefault();
-    if (!company || !role || !file) {
-      setMessage("Please fill all fields and select a file.");
-      return;
+  const handleChange = (e) => {
+    const { name, value, files } = e.target;
+    if (name === "file") {
+      setOffer({ ...offer, file: files[0] });
+    } else {
+      setOffer({ ...offer, [name]: value });
     }
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setMessage("");
 
     const formData = new FormData();
-    formData.append("company", company);
-    formData.append("role", role);
-    formData.append("offerLetter", file);
+    formData.append("studentName", offer.studentName);
+    formData.append("company", offer.company);
+    formData.append("role", offer.role);
+    formData.append("file", offer.file);
 
     try {
       const response = await fetch("http://localhost:3000/offerletters", {
         method: "POST",
-        body: formData,
+        body: formData
       });
+
       const data = await response.json();
       if (response.ok) {
         setMessage("Offer letter uploaded successfully!");
-        setCompany("");
-        setRole("");
-        setFile(null);
+        setOffer({ studentName: "", company: "", role: "", file: null });
       } else {
-        setMessage(data.msg || "Upload failed.");
+        setMessage(data.msg || "Failed to upload offer letter.");
       }
     } catch (err) {
-      setMessage("Error uploading offer letter.");
+      console.error(err);
+      setMessage("An error occurred while uploading offer letter.");
     }
   };
 
@@ -80,7 +90,7 @@ const OfferLetters = () => {
           min-height: 100vh;
         }
 
-        /* Sidebar */
+        /* Left Sidebar */
         .sidebar {
           width: 20vw;
           min-width: 200px;
@@ -122,7 +132,7 @@ const OfferLetters = () => {
           box-shadow: 0 4px 6px rgba(0,123,255,0.2);
         }
 
-        /* Main content */
+        /* Main Content */
         .main-content {
           flex: 1;
           padding: 2rem;
@@ -136,12 +146,11 @@ const OfferLetters = () => {
           margin-bottom: 1.5rem;
         }
 
-        /* Form card */
         .form-card {
           background: white;
           border-radius: 12px;
           padding: 2rem;
-          max-width: 500px;
+          max-width: 600px;
           box-shadow: 0 8px 24px rgba(0,0,0,0.1);
           margin: auto;
         }
@@ -165,11 +174,7 @@ const OfferLetters = () => {
           box-sizing: border-box;
         }
 
-        .form-group input[type="file"] {
-          padding: 0.25rem;
-        }
-
-        .upload-button {
+        .submit-button {
           width: 100%;
           padding: 0.75rem;
           background-color: #28a745;
@@ -182,7 +187,7 @@ const OfferLetters = () => {
           transition: background 0.3s, transform 0.2s;
         }
 
-        .upload-button:hover {
+        .submit-button:hover {
           background-color: #218838;
           transform: translateY(-2px);
         }
@@ -233,24 +238,39 @@ const OfferLetters = () => {
         {/* Sidebar */}
         <aside className="sidebar">
           <nav className="sidebar-nav">
-            <Link to="/dashboard" className="sidebar-link">Student Details</Link>
+            <Link to="/dashboard" className="sidebar-link">Dashboard</Link>
+            <Link to="/student-details" className="sidebar-link">Student Details</Link>
+            <Link to="/offerletters" className="sidebar-link active">Offer Letters</Link>
             <Link to="/schedule" className="sidebar-link">Schedule</Link>
             <Link to="/analytics" className="sidebar-link">Analytics</Link>
-            <Link to="/landing" className="sidebar-link">Dashboard</Link>
+            <Link to="/landing" className="sidebar-link">Landing Page</Link>
           </nav>
         </aside>
 
         {/* Main Content */}
         <main className="main-content">
-          <h2 className="main-title">Upload Offer Letters</h2>
+          <h2 className="main-title">Upload Offer Letter</h2>
           <div className="form-card">
-            <form onSubmit={handleUpload}>
+            <form onSubmit={handleSubmit} encType="multipart/form-data">
+              <div className="form-group">
+                <label>Student Name</label>
+                <input
+                  type="text"
+                  name="studentName"
+                  value={offer.studentName}
+                  onChange={handleChange}
+                  placeholder="Enter student name"
+                  required
+                />
+              </div>
+
               <div className="form-group">
                 <label>Company</label>
                 <input
                   type="text"
-                  value={company}
-                  onChange={(e) => setCompany(e.target.value)}
+                  name="company"
+                  value={offer.company}
+                  onChange={handleChange}
                   placeholder="Enter company name"
                   required
                 />
@@ -260,26 +280,28 @@ const OfferLetters = () => {
                 <label>Role</label>
                 <input
                   type="text"
-                  value={role}
-                  onChange={(e) => setRole(e.target.value)}
+                  name="role"
+                  value={offer.role}
+                  onChange={handleChange}
                   placeholder="Enter role"
                   required
                 />
               </div>
 
               <div className="form-group">
-                <label>Offer Letter</label>
+                <label>Upload File</label>
                 <input
                   type="file"
-                  onChange={(e) => setFile(e.target.files[0])}
+                  name="file"
+                  onChange={handleChange}
                   accept=".pdf,.doc,.docx"
                   required
                 />
               </div>
 
-              <button type="submit" className="upload-button">Upload</button>
+              <button type="submit" className="submit-button">Upload Offer Letter</button>
+              {message && <p className="message">{message}</p>}
             </form>
-            {message && <p className="message">{message}</p>}
           </div>
         </main>
       </div>
