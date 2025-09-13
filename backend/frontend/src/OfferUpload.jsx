@@ -80,46 +80,226 @@ const OfferLetters = () => {
     <>
       <style>{`
         body {
-          margin:0; 
-          font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
-          overflow-x:hidden;
-          background-color: #f4f7f9;
-        }
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f4f7f9;
+  color: #333;
+}
 
-        .dashboard-container { display:flex; flex-direction:column; min-height:100vh; }
+/* Dashboard Layout */
+.dashboard-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
 
-        .header {
-          background-color: #007bff; color:white; display:flex; justify-content:space-between; align-items:center; padding:1rem 2rem;
-        }
-        .logo { font-size:1.5rem; font-weight:bold; }
-        .nav-link { color:white; text-decoration:none; padding:0.5rem 1rem; border-radius:5px; }
-        .nav-link:hover { background-color: rgba(255,255,255,0.2); }
+/* Header */
+.header {
+  background-color: #007bff;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 3vw;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
 
-        .main-layout { display:flex; flex:1; }
-        .sidebar {
-          width:220px; min-width:180px; background-color:#fff; border-right:1px solid #e0e6ed; display:flex; flex-direction:column; padding:1.5rem 1rem;
-        }
-        .sidebar-link { padding:0.75rem 1rem; margin-bottom:0.5rem; text-decoration:none; color:#555; border-radius:6px; }
-        .sidebar-link:hover { background-color:#e9f5ff; color:#007bff; }
-        .sidebar-link.active { background-color:#007bff; color:white; }
+.logo {
+  font-size: 1.8vw;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
 
-        .main-content { flex:1; padding:2rem; overflow-x:hidden; max-width:700px; margin:auto; }
-        .main-title { font-size:1.8rem; color:#0056b3; margin-bottom:1.5rem; }
+.nav-link {
+  color: white;
+  text-decoration: none;
+  font-size: 1vw;
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  transition: background-color 0.3s, color 0.3s;
+}
 
-        .form-card { background:white; border-radius:12px; padding:2rem; box-shadow:0 8px 24px rgba(0,0,0,0.1); }
-        .form-group { margin-bottom:1.5rem; }
-        .form-group label { display:block; margin-bottom:0.5rem; font-weight:600; color:#444; }
-        .form-group input { width:100%; padding:0.75rem; border:1px solid #ccc; border-radius:8px; font-size:1rem; box-sizing:border-box; }
-        .form-group input:focus { outline:none; border-color:#007bff; box-shadow:0 0 0 3px rgba(0,123,255,0.25); }
+.nav-link:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
 
-        .submit-button { width:100%; padding:0.75rem; background:#28a745; color:white; border:none; font-weight:600; font-size:1.1rem; border-radius:8px; cursor:pointer; transition:0.2s; }
-        .submit-button:hover { background:#218838; transform:translateY(-2px); }
-        .success-message { margin-top:1rem; color:green; font-weight:bold; }
+/* Main Layout (Sidebar + Content) */
+.main-layout {
+  display: flex;
+  flex: 1;
+}
 
-        @media(max-width:768px){
-          .main-layout { flex-direction:column; }
-          .sidebar { width:100%; border-right:none; border-bottom:1px solid #e0e6ed; }
-        }
+/* Sidebar */
+.sidebar {
+  width: 20vw;
+  min-width: 200px;
+  background-color: #fff;
+  padding: 2rem 0;
+  border-right: 1px solid #e0e6ed;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  padding: 0 1.5rem;
+}
+
+.sidebar-link {
+  display: flex;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  margin-bottom: 0.5rem;
+  text-decoration: none;
+  color: #555;
+  font-size: 1.1vw;
+  min-height: 30px;
+  font-weight: 500;
+  border-radius: 8px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.sidebar-link:hover {
+  background-color: #e9f5ff;
+  color: #007bff;
+}
+
+.sidebar-link.active {
+  background-color: #007bff;
+  color: white;
+  box-shadow: 0 4px 6px rgba(0, 123, 255, 0.2);
+}
+
+/* Main Content Area */
+.main-content {
+  flex: 1;
+  padding: 2rem;
+  max-width: 700px;
+  margin: auto;
+  overflow-y: auto;
+}
+
+.main-title {
+  color: #0056b3;
+  margin-bottom: 1.5rem;
+  font-size: 2.2vw;
+  font-weight: 600;
+  min-height: 25px;
+}
+
+/* Form Card */
+.form-card {
+  background-color: #fff;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: #444;
+}
+
+input[type="text"],
+input[type="date"],
+input[type="file"] {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+  box-sizing: border-box;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+input:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
+}
+
+/* Submit Button */
+.submit-button {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: background-color 0.3s, transform 0.2s;
+  width: 100%;
+}
+
+.submit-button:hover {
+  background-color: #218838;
+  transform: translateY(-2px);
+}
+
+/* Success Message */
+.success-message {
+  margin-top: 1rem;
+  color: green;
+  font-weight: bold;
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    padding: 1rem;
+  }
+
+  .logo {
+    font-size: 5vw;
+  }
+
+  .nav-link {
+    font-size: 3vw;
+    margin-top: 10px;
+  }
+
+  .main-layout {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    border-right: none;
+    border-bottom: 1px solid #e0e6ed;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  }
+
+  .sidebar-nav {
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 1rem 0;
+  }
+
+  .sidebar-link {
+    font-size: 3vw;
+    min-height: auto;
+  }
+
+  .main-content {
+    padding: 1rem;
+  }
+
+  .main-title {
+    font-size: 6vw;
+  }
+}
+
       `}</style>
 
       <div className="dashboard-container">
