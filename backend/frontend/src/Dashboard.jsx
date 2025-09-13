@@ -1,6 +1,24 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  const data = {
+    studentName, registerNumber, tenthMarks, twelfthMarks, semesterResults, aggregate
+  };
+  try {
+    await fetch('/api/students', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    });
+    alert('Student saved successfully!');
+  } catch (err) {
+    console.error(err);
+    alert('Error saving student');
+  }
+};
+
 const Dashboard = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -285,5 +303,6 @@ const Dashboard = () => {
     </>
   );
 };
+
 
 export default Dashboard;
