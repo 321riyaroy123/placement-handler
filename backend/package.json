@@ -7,7 +7,7 @@
   "scripts": {
     "start": "node app.js",
     "dev": "nodemon app.js",
-    "postinstall": "cd ../frontend && npm install && npm run build"
+    "postinstall": "cd backend/frontend && npm install && npm run build"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
