@@ -234,7 +234,6 @@ const OfferLetters = () => {
         <aside className="sidebar">
           <nav className="sidebar-nav">
             <Link to="/dashboard" className="sidebar-link">Student Details</Link>
-            <Link to="/offerletters" className="sidebar-link active">Offer Letters</Link>
             <Link to="/schedule" className="sidebar-link">Schedule</Link>
             <Link to="/analytics" className="sidebar-link">Analytics</Link>
             <Link to="/landing" className="sidebar-link">Dashboard</Link>
