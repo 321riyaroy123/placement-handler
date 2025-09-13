@@ -6,9 +6,11 @@ export default defineConfig({
   plugins: [react()],
   build: {
     outDir: 'dist',
-    rollupOptions: {
-      input: path.resolve(__dirname, 'index.html'),
+  },
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirname, 'src'),
     },
   },
-  base: '/', // very important for React Router
+  base: './', // important for serving from Express
 });
