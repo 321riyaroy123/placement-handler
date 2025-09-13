@@ -8,7 +8,28 @@ const OfferUpload = () => {
     offerDate: "",
     offerLetter: null
   });
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  const formData = new FormData();
+  formData.append('studentName', studentName);
+  formData.append('registerNumber', registerNumber);
+  formData.append('companyName', companyName);
+  formData.append('offerDate', offerDate);
+  formData.append('offerLetter', offerLetterFile);
 
+  try {
+    await fetch('/api/offers', {
+      method: 'POST',
+      body: formData
+    });
+    alert('Offer uploaded successfully!');
+  } catch (err) {
+    console.error(err);
+    alert('Error uploading offer');
+  }
+};
+
+  
   const handleChange = (e) => {
     if (e.target.name === "offerLetter") {
       setFormData({ ...formData, offerLetter: e.target.files[0] });
