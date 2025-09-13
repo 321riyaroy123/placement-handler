@@ -31,7 +31,7 @@ const Register = () => {
       if (response.ok) {
         console.log('User registered successfully:', data);
         // Redirect to dashboard on successful registration
-        window.location.href = '/dashboard';
+        window.location.href = '/landing';
       } else {
         // Display error message from the backend
         setError(data.msg || 'Registration failed');
