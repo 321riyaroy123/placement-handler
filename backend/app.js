@@ -27,10 +27,8 @@ app.use(express.static(path.join(__dirname, 'frontend', 'dist')));
 app.use('/auth', authRouter);
 app.use("/api/offers", offerRouter);
 import studentRouter from './routes/students.js';
-import offerRouter from './routes/offers.js';
-
 app.use('/api/students', studentRouter);
-app.use('/api/offers', offerRouter);
+
 
 // SPA fallback: send index.html for all other routes
 app.get('*', (req, res) => {
