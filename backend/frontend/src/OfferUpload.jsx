@@ -86,21 +86,31 @@ const OfferLetters = () => {
 
         /* Layout */
         .main-layout {
-          display: flex;
-          min-height: 100vh;
-        }
+  display: flex;
+  min-height: 100vh;
+}
 
-        /* Left Sidebar */
-        .sidebar {
-          width: 20vw;
-          min-width: 200px;
-          background-color: #fff;
-          padding: 2rem 0;
-          border-right: 1px solid #e0e6ed;
-          box-shadow: 2px 0 5px rgba(0,0,0,0.05);
-          display: flex;
-          flex-direction: column;
-        }
+/* Left Sidebar */
+.sidebar {
+  width: 20vw; /* or min-width: 200px */
+  background-color: #fff;
+  padding: 2rem 0;
+  border-right: 1px solid #e0e6ed;
+  box-shadow: 2px 0 5px rgba(0,0,0,0.05);
+  display: flex;
+  flex-direction: column;
+}
+
+/* Main content takes remaining space */
+.main-content {
+  flex: 1; /* <- This ensures it fills all available space */
+  padding: 2rem;
+  overflow-y: auto;
+}
+
+/* Remove any extra sidebar or padding on the right */
+
+      
 
         .sidebar-nav {
           display: flex;
@@ -133,12 +143,7 @@ const OfferLetters = () => {
         }
 
         /* Main Content */
-        .main-content {
-          flex: 1;
-          padding: 2rem;
-          overflow-y: auto;
-        }
-
+        
         .main-title {
           font-size: 2.2vw;
           font-weight: 600;
