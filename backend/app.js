@@ -19,11 +19,12 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(cors());
 
-// ✅ Serve static assets
-app.use('/frontend/src', express.static(path.join(__dirname, 'frontend', 'src')));
+app.use(express.static(path.join(__dirname, 'frontend', 'dist')));
 
-// ✅ Serve HTML pages
-app.get('/', (req, res) => res.sendFile(path.join(__dirname, '/frontend/index.html')));
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'frontend', 'dist', 'index.html'));
+});
+
 app.get('/login', (req, res) => res.sendFile(path.join(__dirname, 'login.html')));
 app.get('/schedule', (req, res) => res.sendFile(path.join(__dirname, 'schedule.html')));
 app.get('/overview', (req, res) => res.sendFile(path.join(__dirname, 'overview.html')));
