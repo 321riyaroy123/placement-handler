@@ -23,6 +23,7 @@ function App() {
         <Route path="/analytics" element={<Analytics />} />
         <Route path="/overview" element={<Overview />} />
         <Route path="/schedule" element={<Schedule />} />
+        <Route path="/offer-upload" element={<offerUpload />} />
       </Routes>
     </Router>
   );
