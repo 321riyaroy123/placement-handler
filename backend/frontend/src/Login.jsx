@@ -27,7 +27,7 @@ const LoginPage = () => {
 
       if (response.ok) {
         console.log('Login successful:', data);
-        navigate('/dashboard'); // ✅ React Router redirection
+        navigate('/landing'); // ✅ React Router redirection
       } else {
         setError(data.msg || 'Login failed');
       }
@@ -168,4 +168,5 @@ const LoginPage = () => {
 };
 
 export default LoginPage;
+
 
